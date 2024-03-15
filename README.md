@@ -26,8 +26,13 @@ The .env file should have the following structure
 TF_VAR_GCP_PROJECT=google_project_name # This is used in the Terraform scripts to create new assets in GCP
 ```
 
+### 2. Setting permissions in Google 
+Add role to the default engine account
+
 ### 2. Run build.sh
 This will run x, y , z
+> [!NOTE]  
+> Creating the Composer environment 
 ```bash
 ./build.sh
 ```

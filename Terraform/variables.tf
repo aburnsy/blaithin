@@ -12,8 +12,3 @@ variable "GCP_BUCKET_LOCATION" {
   type        = string
   default     = "US"
 }
-
-variable "GCP_BUCKET_NAME" {
-  description = "Name of the Storage Bucket. This has to be unique across all GCP."
-  type        = string
-}
