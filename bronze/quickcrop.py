@@ -11,9 +11,8 @@ def parse_products(URL: str, category: str, products: list) -> list[dict]:
     # Skip the first row as that as the heading though its not labeled as such
     for product in products[1:]:
         try:
-            product_link = product.find("a", class_="productLink")
-            product_url = urljoin(URL, product_link["href"])
-            product_name = product.find("p", class_="productName").text
+            product_url = product.find("a", class_="card-figure__link")
+            product_name = product.find("h2", class_="card-title").text
             product_code = product.find("p", class_="productCode").find("span").text
             image = product.find("div", class_="imageWrap").find("img")
             if image is None:
@@ -61,7 +60,7 @@ def parse_url(URL: str, category: str) -> list[dict]:
     session = HTMLSession()
     page = session.get(URL)
     content = BeautifulSoup(page.content, "html.parser")
-    products = content.table.find_all("tr")
+    products = content.find("ul", class_="productGrid").find_all("li")
     parsed_products = parse_products(URL=URL, category=category, products=products)
     print(f"Found {len(parsed_products)} products for {category}")
     return parsed_products
@@ -71,6 +70,6 @@ def get_product_data(config_file_name: str = "tullys") -> list[dict] | None:
     config = importlib.import_module("config." + config_file_name)
     results = []
 
-    for URL, category in config.tullys_data_sources:
+    for URL, category in config.quickcrop_data_sources:
         results.extend(parse_url(URL=URL, category=category))
     return results
