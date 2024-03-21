@@ -1,2 +1,6 @@
 requests-html
 polars
+pyarrow
+argparse
+# selenium
+# webdriver_manager

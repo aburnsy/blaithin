@@ -8,10 +8,10 @@ terraform -chdir=Terraform apply --auto-approve
 
 
 # Fetch Terraform output for use later
-bucket_name=$(terraform -chdir=Terraform output bucket_name)
-airflow_uri=$(terraform -chdir=Terraform output airflow_uri)
-composer_env_id=$(terraform -chdir=Terraform output composer_env_id)
-composer_env_name=$(terraform -chdir=Terraform output composer_env_name)
-gcs_bucket=$(terraform -chdir=Terraform output gcs_bucket)
-gke_cluster=$(terraform -chdir=Terraform output gke_cluster)
+bucket_name=$(terraform -chdir=Terraform output -raw bucket_name)
+airflow_uri=$(terraform -chdir=Terraform output -raw airflow_uri)
+composer_env_id=$(terraform -chdir=Terraform output -raw composer_env_id)
+composer_env_name=$(terraform -chdir=Terraform output -raw composer_env_name)
+gcs_bucket=$(terraform -chdir=Terraform output -raw gcs_bucket)
+gke_cluster=$(terraform -chdir=Terraform output -raw gke_cluster)
 # echo $bucket_name
