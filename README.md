@@ -11,6 +11,10 @@ There is also a vast differential in prices across the main nurseries in Ireland
 
 As someone who is passionate about gardening, I find the process of buying new plants very frustrating. I research new plants/ideas on a number of different websites. With my selections in mind, I then have search through many known nurseries which deliver to my location to determine which has the best pricing including delivery fees (which can be up to €60 in some cases).
 
+# Future Plans for Blaithin
+For now, we are parsing data manually to understand sizing, quantity and categorisation. This would be a great candidate for machine learning. 
+Additionally
+
 # Build Instructions
 
 # Assumptions

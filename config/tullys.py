@@ -1,4 +1,4 @@
-tullys_data_sources = [
+data_sources = [
     [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=FruitTrees",
         "Fruit Trees",
@@ -19,13 +19,16 @@ tullys_data_sources = [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Ericaceous",
         "Ericaceous",
     ],
-    ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Fern", "Fern"],
-    ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Grass", "Grass"],
+    ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Fern", "Grasses & Ferns"],
+    [
+        "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Grass",
+        "Grasses & Ferns",
+    ],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Heather", "Heather"],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Hedging", "Hedging"],
     [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Herbaceous",
-        "Herbaceous",
+        "Perennials",
     ],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Herbs", "Herbs"],
     [

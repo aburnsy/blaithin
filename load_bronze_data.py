@@ -1,5 +1,6 @@
 import argparse
 import bronze.tullys as tullys
+import bronze.quickcrop as quickcrop
 import cloud_storage
 
 
@@ -8,11 +9,20 @@ def main(params):
 
     match params.sites:
         case "tullys":
-            tullys_results = tullys.get_product_data()
-            cloud_storage.export_data_to_gcs(table=tullys_results, root_path=root_path)
+            cloud_storage.test_export_data_to_gcs(
+                table=tullys.get_product_data(), root_path=root_path
+            )
+        case "quickcrop":
+            cloud_storage.export_data_to_gcs(
+                table=quickcrop.get_product_data(), root_path=root_path
+            )
         case _:
-            tullys_results = tullys.get_product_data()
-            cloud_storage.export_data_to_gcs(table=tullys_results, root_path=root_path)
+            cloud_storage.export_data_to_gcs(
+                table=tullys.get_product_data(), root_path=root_path
+            )
+            cloud_storage.export_data_to_gcs(
+                table=quickcrop.get_product_data(), root_path=root_path
+            )
 
 
 if __name__ == "__main__":
@@ -29,3 +39,5 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     main(args)
+
+# d:/Development/blaithin/.venv/Scripts/python.exe d:/Development/blaithin/load_bronze_data.py --bucket_name=$(terraform -chdir=Terraform output -raw bucket_name)

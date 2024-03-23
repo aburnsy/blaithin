@@ -49,7 +49,6 @@ def parse_products(URL: str, category: str, products: list) -> list[dict]:
                 }
             )
         except Exception as error:
-            print("An exception occured which we will ignore", error)
             template = "An exception of type {0} occurred. Arguments:\n{1!r}"
             message = template.format(type(error).__name__, error.args)
             print(message)
@@ -71,6 +70,6 @@ def get_product_data(config_file_name: str = "tullys") -> list[dict] | None:
     config = importlib.import_module("config." + config_file_name)
     results = []
 
-    for URL, category in config.tullys_data_sources:
+    for URL, category in config.data_sources:
         results.extend(parse_url(URL=URL, category=category))
     return results
