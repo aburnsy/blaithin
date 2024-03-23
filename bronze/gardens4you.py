@@ -62,20 +62,28 @@ def parse_products(URL: str, category: str, products: list) -> list[dict]:
             if len(filtered_list) == 1:
                 size = filtered_list[0]
             else:
-                temp_str = product.find(
-                    "strong", class_="product name product-item-name"
-                ).a.text
-                if size_cm := re.search(size_pattern_cm, temp_str):
-                    size = size_cm.group(0).replace(" ", "")
-                elif size_p := re.search(size_pattern_pval, temp_str):
-                    size = size_p.group(0)
-                elif size_l := re.search(size_pattern_litre, temp_str):
-                    size = size_l.group(0).replace("tr", "")
-                elif "bare root" in temp_str.lower():
-                    size = "Bare Root"
+                # 3 ltr
+                filtered_list = [
+                    re.search(size_pattern_litre, entry).group(0)
+                    for entry in misc
+                    if re.search(size_pattern_litre, entry)
+                ]
+                if len(filtered_list) == 1:
+                    size = filtered_list[0].replace("tr", "")
                 else:
-                    print(f"Could not find size for {product_url}")
-                    size = "Bare Root"
+                    temp_str = product.find(
+                        "strong", class_="product name product-item-name"
+                    ).a.text
+                    if size_cm := re.search(size_pattern_cm, temp_str):
+                        size = size_cm.group(0).replace(" ", "")
+                    elif size_p := re.search(size_pattern_pval, temp_str):
+                        size = size_p.group(0)
+                    elif size_l := re.search(size_pattern_litre, temp_str):
+                        size = size_l.group(0).replace("tr", "")
+                    elif "bare root" in temp_str.lower():
+                        size = "Bare Root"
+                    else:
+                        size = "Bare Root"
 
         # quantity
         filtered_list = [
