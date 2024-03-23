@@ -9,12 +9,13 @@ def main(params):
 
     match params.sites:
         case "tullys":
-            cloud_storage.test_export_data_to_gcs(
-                table=tullys.get_product_data(), root_path=root_path
+            cloud_storage.export_data_locally(
+                table=tullys.get_product_data("tullys_test"), root_path=root_path
             )
         case "quickcrop":
-            cloud_storage.export_data_to_gcs(
-                table=quickcrop.get_product_data(), root_path=root_path
+            cloud_storage.export_data_locally(
+                table=quickcrop.get_product_data("quickcrop_test"),
+                root_path=root_path,
             )
         case _:
             cloud_storage.export_data_to_gcs(

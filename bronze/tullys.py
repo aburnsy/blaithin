@@ -17,10 +17,9 @@ def parse_products(URL: str, category: str, products: list) -> list[dict]:
             product_code = product.find("p", class_="productCode").find("span").text
             image = product.find("div", class_="imageWrap").find("img")
             if image is None:
-                thumbnail_url = img_url = None
+                img_url = None
             else:
-                thumbnail_url = urljoin(URL, image["src"])
-                img_url = thumbnail_url.rsplit("&Thumbnail=true", 1)[0]
+                img_url = urljoin(URL, image["src"]).rsplit("&Thumbnail=true", 1)[0]
             description = product.find("p", class_="description").find("span").text
             price_exc_vat = (
                 product.find("div", class_="priceVatExcCurrencySymbol")

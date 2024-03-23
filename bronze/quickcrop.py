@@ -16,14 +16,17 @@ import importlib
 def selenium_setup() -> webdriver:
     driver = webdriver.Chrome()
     driver.get("https://www.quickcrop.ie")
-    WebDriverWait(driver, 10).until(
-        expected_conditions.element_to_be_clickable(
-            (
-                By.XPATH,
-                "//button[@class='sd-button-widget calashock-categories-widget__button button button--primary'][text()='ACCEPT ALL COOKIES']",
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.element_to_be_clickable(
+                (
+                    By.XPATH,
+                    "//button[@class='sd-button-widget calashock-categories-widget__button button button--primary'][text()='ACCEPT ALL COOKIES']",
+                )
             )
-        )
-    ).click()
+        ).click()
+    except TimeoutException:
+        print("Error accepting cookies modal. We will assume this is unnecessary...")
 
     ## Implicit waits weren't working. The modal seems to take time to close
     time.sleep(1)
@@ -46,7 +49,7 @@ multibuy_pattern_plant = re.compile(r"(\d+ Plant)", flags=re.IGNORECASE)
 numeric_pattern_compiled = re.compile(r"(\d+)")
 
 
-def extract_quantity_from_text(product_text: str) -> tuple[int, bool]:
+def extract_quantity_from_text(product_text: str) -> int:
     multibuy_str = (
         re.search(multibuy_pattern_deal, product_text)
         or re.search(multibuy_pattern_trees, product_text)
@@ -57,11 +60,9 @@ def extract_quantity_from_text(product_text: str) -> tuple[int, bool]:
         quantity = int(
             re.search(numeric_pattern_compiled, multibuy_str.group(0)).group(0)
         )
-        multibuy = True
     else:
         quantity = 1
-        multibuy = False
-    return quantity, multibuy
+    return quantity
 
 
 size_pattern_litres = re.compile(r"(0?\.?\d+\s?L)")
@@ -83,7 +84,7 @@ def extract_size_from_text(text: str) -> str:
                 size = text.lower()
             else:
                 print(f"Could not find size in {text}")
-                size = None
+                size = "9 cm"  # Size isn't specified so we default to 9cm
     return size
 
 
@@ -116,21 +117,25 @@ def fetch_data_interactive(
         .find_element(By.TAG_NAME, "img")
         .get_attribute("src")
     )
-    try:
-        description_lst = driver.find_element(
-            By.XPATH, '//div[@id="custom-product-short-description"]'
-        ).find_elements(By.TAG_NAME, "li")
+
+    desc_base = driver.find_element(
+        By.XPATH, '//div[@id="custom-product-short-description"]'
+    )
+    # find_elements returns empty list if not found
+    description_lst = desc_base.find_elements(By.TAG_NAME, "li")
+    if len(description_lst) > 0:
         description = "\n".join(
             [element.get_attribute("innerHTML") for element in description_lst]
         )
-    except AttributeError:
-        description = (
-            driver.find_element(
-                By.XPATH, '//div[@id="custom-product-short-description"]'
+    else:
+        try:
+            description = (
+                desc_base.find_element(By.TAG_NAME, "p")
+                .get_attribute("innerHTML")
+                .strip()
             )
-            .get_attribute("innerHTML")
-            .strip()
-        )
+        except NoSuchElementException:
+            description = desc_base.get_attribute("innerHTML").strip()
 
     for option in select_element.find_elements(By.TAG_NAME, "option"):
         option_value = option.get_attribute("value")
@@ -141,29 +146,35 @@ def fetch_data_interactive(
             # Wait for the price element to change after making a selection
             select.select_by_value(option_value)
             try:
-                WebDriverWait(driver, 5).until_not(
+                WebDriverWait(driver, 10).until_not(
                     expected_conditions.text_to_be_present_in_element(
                         (By.XPATH, '//span[@class="price price--withTax"]'), price
                     )
                 )
             except TimeoutException:
-                print(f"timeout when fetching price for {option_name}")
+                print(
+                    f"timeout when fetching price for {option_name} from {product_url}"
+                )
 
             price = driver.find_element(
                 By.XPATH, '//span[@class="price price--withTax"]'
             ).get_attribute("innerHTML")
             try:
-                stock = driver.find_element(
-                    By.XPATH, '//span[@data-product-stock=""]'
-                ).get_attribute("innerHTML")
-                if stock == "":
-                    stock = 1
+                stock = int(
+                    driver.find_element(
+                        By.XPATH, '//span[@data-product-stock=""]'
+                    ).get_attribute("innerHTML")
+                )
             except NoSuchElementException:
                 stock = 0
 
+            ## In this case it seems QQ don't display the stock. Any amount of stock can be purchased, so lets set to 100
+            except ValueError:
+                stock = 100
+
             price_inc_vat = extract_price_from_text(price)
             size = extract_size_from_text(option_name)
-            quantity, multibuy = extract_quantity_from_text(option_name)
+            quantity = extract_quantity_from_text(option_name)
             results.append(
                 {
                     "source": "quickcrop",
@@ -171,14 +182,12 @@ def fetch_data_interactive(
                     "product_url": product_url,
                     "category": category,
                     "product_name": product_name,
-                    "product_code": None,
                     "img_url": img_url,
                     "description": description,
                     "price": price_inc_vat,
                     "size": size,
                     "stock": stock,
                     "quantity": quantity,
-                    "multibuy": multibuy,
                 }
             )
     return results
@@ -199,28 +208,25 @@ def fetch_data(
 
     size = "9 cm"  # Size isn't specified so we default to 9cm
 
-    quantity, multibuy = extract_quantity_from_text(product_name_str)
-
+    quantity = extract_quantity_from_text(product_name_str)
     try:
         stock = int(
             product_content.find(
                 "div", class_="form-field form-field--stock"
             ).label.span.text
         )
-        if stock == "":
-            stock = 1
     except AttributeError:
         stock = 0
 
     try:
-        description_lst = product_content.find(
-            "div", id="custom-product-short-description"
-        ).ul.find_all("li")
+        desc_base = product_content.find("div", id="custom-product-short-description")
+        description_lst = desc_base.ul.find_all("li")
         description = "\n".join([element.text for element in description_lst])
     except AttributeError:
-        description = product_content.find(
-            "div", id="custom-product-short-description"
-        ).text.strip()
+        try:
+            description = desc_base.p.text.strip()
+        except AttributeError:
+            description = desc_base.text.strip()
 
     return {
         "source": "quickcrop",
@@ -228,15 +234,12 @@ def fetch_data(
         "product_url": product_url,
         "category": category,
         "product_name": product_name,
-        "product_code": None,
         "img_url": img_url,
         "description": description,
         "price": price_inc_vat,
         "size": size,
         "stock": stock,
         "quantity": quantity,
-        "price_per_unit": round(price_inc_vat / quantity, 2),
-        "multibuy": multibuy,
     }
 
 
