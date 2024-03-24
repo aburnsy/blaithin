@@ -2,6 +2,7 @@ import argparse
 import bronze.tullys as tullys
 import bronze.quickcrop as quickcrop
 import bronze.gardens4you as gardens4you
+import bronze.carragh as carragh
 import cloud_storage
 
 
@@ -20,7 +21,12 @@ def main(params):
             )
         case "gardens4you":
             cloud_storage.export_data_locally(
-                table=gardens4you.get_product_data("gardens4you"),
+                table=gardens4you.get_product_data("gardens4you_test"),
+                root_path=root_path,
+            )
+        case "carragh":
+            cloud_storage.export_data_locally(
+                table=carragh.get_product_data("carragh_test"),
                 root_path=root_path,
             )
         case _:
@@ -32,6 +38,10 @@ def main(params):
             )
             cloud_storage.export_data_to_gcs(
                 table=gardens4you.get_product_data(), root_path=root_path
+            )
+            cloud_storage.export_data_to_gcs(
+                table=carragh.get_product_data(),
+                root_path=root_path,
             )
 
 
@@ -45,7 +55,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--site",
         help="Name of the site you would like to fetch data for.",
-        choices=["tullys", "quickcrop", "gardens4you"],
+        choices=["tullys", "quickcrop", "gardens4you", "carragh"],
     )
     args = parser.parse_args()
     main(args)

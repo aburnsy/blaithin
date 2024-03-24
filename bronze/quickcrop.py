@@ -140,7 +140,7 @@ def fetch_data_interactive(
         option_value = option.get_attribute("value")
         option_name = option.get_attribute("innerHTML")
         if option_value == "" or option_name == "See Options":
-            pass
+            continue
         else:
             # Wait for the price element to change after making a selection
             select.select_by_value(option_value)
