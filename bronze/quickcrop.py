@@ -83,7 +83,6 @@ def extract_size_from_text(text: str) -> str:
             elif text.lower() in ["small", "medium", "large"]:
                 size = text.lower()
             else:
-                print(f"Could not find size in {text}")
                 size = "9 cm"  # Size isn't specified so we default to 9cm
     return size
 

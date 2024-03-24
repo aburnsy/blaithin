@@ -20,7 +20,7 @@ def main(params):
             )
         case "gardens4you":
             cloud_storage.export_data_locally(
-                table=gardens4you.get_product_data("gardens4you_test"),
+                table=gardens4you.get_product_data("gardens4you"),
                 root_path=root_path,
             )
         case _:
@@ -50,4 +50,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     main(args)
 
-# d:/Development/blaithin/.venv/Scripts/python.exe d:/Development/blaithin/load_bronze_data.py --bucket_name=$(terraform -chdir=Terraform output -raw bucket_name)
+# d:/Development/blaithin/.venv/Scripts/python.exe d:/Development/blaithin/load_bronze_data.py --bucket_name=$(terraform -chdir=Terraform output -raw bucket_name) --site=gardens4you

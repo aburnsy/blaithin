@@ -5,11 +5,45 @@ from bs4 import BeautifulSoup
 import re
 import importlib
 
+session = HTMLSession()
+
 quantity_pattern = re.compile(r"^\d+x$")
 stock_pattern = re.compile(r"\d+")
 size_pattern_cm = re.compile(r"\d+\s*cm", flags=re.IGNORECASE)
 size_pattern_litre = re.compile(r"\d+\s*ltr", flags=re.IGNORECASE)
-size_pattern_pval = re.compile(r"P\d+")
+size_pattern_pval = re.compile(r"P\s*\d+")
+
+
+def extract_size_from_url(product_url: str) -> str:
+    page = session.get(product_url)
+    content = BeautifulSoup(page.content, "html.parser")
+    if height := content.find("td", {"data-th": "aa_height", "class": "col data"}):
+        return re.search(size_pattern_cm, height.text).group(0)
+    if del_as := content.find("td", {"data-th": "Delivered as", "class": "col data"}):
+        if "roots" in del_as.text.lower():
+            return "Bare Root"
+        elif "pot" in del_as.text.lower():
+            return "9 cm"
+        elif "seeds" in del_as.text.lower():
+            return "Seeds"
+        else:
+            raise Exception(f"NOT FOUND for {product_url} with {del_as.text}")
+        return re.search(size_pattern_cm, del_as.text).group(0)
+    if attr_desc := content.find("div", class_="product attribute description"):
+        if elements := attr_desc.select("div"):
+            for element in elements:
+                if size_fnd := re.search(size_pattern_cm, element.text):
+                    return size_fnd.group(0)
+        if elements := attr_desc.select("li"):
+            for element in elements:
+                if size_fnd := re.search(size_pattern_cm, element.text):
+                    return size_fnd.group(0)
+    if attr_main := content.find("div", class_="att-container"):
+        if elements := attr_main.select("div"):
+            for element in elements:
+                if "seed" in element.text.lower():
+                    return "Seeds"
+    return "Bare Root"
 
 
 def extract_price_from_text(price_str):
@@ -51,7 +85,7 @@ def parse_products(URL: str, category: str, products: list) -> list[dict]:
         if "roots" in misc or "tubers" in misc:
             size = "Bare Root"
         elif "seeds" in misc:
-            size = "seeds"
+            size = "Seeds"
         else:
             # ø 9cm
             filtered_list = [
@@ -83,7 +117,7 @@ def parse_products(URL: str, category: str, products: list) -> list[dict]:
                     elif "bare root" in temp_str.lower():
                         size = "Bare Root"
                     else:
-                        size = "Bare Root"
+                        size = extract_size_from_url(product_url=product_url)
 
         # quantity
         filtered_list = [
@@ -123,7 +157,6 @@ def parse_products(URL: str, category: str, products: list) -> list[dict]:
 
 
 def parse_url(URL: str, category: str) -> list[dict]:
-    session = HTMLSession()
     page_number = 1
     results = []
 
