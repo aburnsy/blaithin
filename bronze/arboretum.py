@@ -152,17 +152,3 @@ def get_product_data(config_file_name: str = "quickcrop") -> list[dict] | None:
         results.extend(parse_url(URL=URL, category=category, driver=driver))
     driver.quit()
     return results
-
-
-# URL = "https://www.arboretum.ie/shop/products/plants-seeds-and-bulbs/trees-and-specimen-plants"
-# category = "Perennials"
-# parse_url(URL=URL, category=category, driver=selenium_setup())
-
-
-a = fetch_data(
-    product_url="https://www.arboretum.ie/shop/products/buxus-sempervirens-6-pack.html",
-    source_url="a",
-    category="b",
-    session=HTMLSession(),
-)
-print(a)

@@ -1,4 +1,5 @@
 import time
+# from requests_html import HTMLSession
 
 
 class ScrollToBottom:
@@ -26,3 +27,9 @@ class ScrollToBottom:
             self.start_time = time.time()
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             return False
+
+
+# def test_url(url_to_test: str, session=HTMLSession()) -> bool:
+#     if session.get(url_to_test).status_code != 200:
+#         return False
+#     return True

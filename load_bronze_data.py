@@ -1,12 +1,6 @@
 import argparse
-import bronze.tullys as tullys
-import bronze.quickcrop as quickcrop
-import bronze.gardens4you as gardens4you
-import bronze.carragh as carragh
-import bronze.arboretum as arboretum
-
-# import bronze.common as common
 import cloud_storage
+from bronze import tullys, quickcrop, gardens4you, carragh, arboretum, rhs
 
 
 def main(params):
@@ -15,7 +9,8 @@ def main(params):
     match params.site:
         case "tullys":
             cloud_storage.export_data_locally(
-                table=tullys.get_product_data("tullys_test"), root_path=root_path
+                table=tullys.get_product_data("tullys_test"),
+                root_path=root_path,
             )
         case "quickcrop":
             cloud_storage.export_data_locally(
@@ -37,6 +32,11 @@ def main(params):
                 table=arboretum.get_product_data("arboretum"),
                 root_path=root_path,
             )
+        case "rhs_urls":
+            cloud_storage.export_data_locally(
+                table=rhs.get_plant_urls(),
+                root_path=root_path,
+            )
         case _:
             cloud_storage.export_data_to_gcs(
                 table=tullys.get_product_data(), root_path=root_path
@@ -55,6 +55,10 @@ def main(params):
                 table=arboretum.get_product_data(),
                 root_path=root_path,
             )
+            cloud_storage.export_data_to_gcs(
+                table=rhs.get_plant_urls(),
+                root_path=root_path,
+            )
 
 
 if __name__ == "__main__":
@@ -67,11 +71,18 @@ if __name__ == "__main__":
     parser.add_argument(
         "--site",
         help="Name of the site you would like to fetch data for.",
-        choices=["tullys", "quickcrop", "gardens4you", "carragh", "arboretum"],
+        choices=[
+            "tullys",
+            "quickcrop",
+            "gardens4you",
+            "carragh",
+            "arboretum",
+            "rhs_urls",
+        ],
     )
     args = parser.parse_args()
     main(args)
 
 """
-d:/Development/blaithin/.venv/Scripts/python.exe d:/Development/blaithin/load_bronze_data.py --bucket_name=$(terraform -chdir=Terraform output -raw bucket_name) --site=arboretum
+d:/Development/blaithin/.venv/Scripts/python.exe d:/Development/blaithin/load_bronze_data.py --bucket_name=$(terraform -chdir=Terraform output -raw bucket_name) --site=rhs_urls
 """
