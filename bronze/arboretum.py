@@ -144,7 +144,7 @@ def parse_url(URL: str, category: str, driver: webdriver) -> list[dict]:
     return results
 
 
-def get_product_data(config_file_name: str = "quickcrop") -> list[dict] | None:
+def get_product_data(config_file_name: str = "arboretum") -> list[dict] | None:
     config = importlib.import_module("config." + config_file_name)
     results = []
     driver = selenium_setup()
