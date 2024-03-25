@@ -17,14 +17,14 @@ data_sources = [
     ],
     [
         "https://www.quickcrop.ie/category/rhubarb-crowns/",
-        "Soft Fruit",
+        "Fruit",
     ],
     [
         "https://www.quickcrop.ie/category/soft-fruit/",
-        "Soft Fruit",
+        "Fruit",
     ],
     [
         "https://www.quickcrop.ie/category/fruit-trees/",
-        "Fruit Trees",
+        "Fruit",
     ],
 ]

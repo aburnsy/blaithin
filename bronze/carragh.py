@@ -17,26 +17,6 @@ def selenium_setup() -> webdriver:
 
 
 numeric_pattern_compiled = re.compile(r"(\d+)")
-size_pattern_litres = re.compile(r"(0?\.?\d+\s?L)")
-size_pattern_centimetres = re.compile(r"(\d+\s?-\s?\d+\s?cm)", flags=re.IGNORECASE)
-
-
-def extract_size_from_text(text: str) -> str:
-    size_str = re.search(size_pattern_litres, text)
-    if size_str:
-        size = size_str.group(0).replace(" L", "L")
-    else:
-        size_str = re.search(size_pattern_centimetres, text)
-        if size_str:
-            size = size_str.group(0)
-        else:
-            if "tree" in text.lower() or "crown" in text.lower():
-                size = None
-            elif text.lower() in ["small", "medium", "large"]:
-                size = text.lower()
-            else:
-                size = "9 cm"  # Size isn't specified so we default to 9cm
-    return size
 
 
 def extract_price_from_text(price_str):
@@ -52,14 +32,6 @@ def fetch_data_interactive(
     driver.get(product_url)
 
     try:
-        driver.find_element(By.XPATH, '//div[@class="wp-die-message"]')
-        print(f"Error fetching data for {product_url}")
-        return None
-    except NoSuchElementException:
-        # if we don't find that element its a good thing. This website seems to have weird wp errors
-        pass
-
-    try:
         select_element = driver.find_element(By.XPATH, '//select[@id="pa_pot-size"]')
     except NoSuchElementException:
         try:
@@ -67,17 +39,22 @@ def fetch_data_interactive(
                 By.XPATH, '//select[@id="pa_variation"]'
             )
         except NoSuchElementException:
-            select_element = driver.find_element(By.XPATH, '//select[@id="pa_size"]')
+            try:
+                select_element = driver.find_element(
+                    By.XPATH, '//select[@id="pa_size"]'
+                )
+            except NoSuchElementException:
+                try:
+                    select_element = driver.find_element(
+                        By.XPATH, '//select[@id="pa_colour"]'
+                    )
+                except NoSuchElementException:
+                    print(
+                        f"Error fetching data for {product_url}. No dropdown options found."
+                    )
+                    return None
 
     select = Select(select_element)
-
-    price = (
-        driver.find_element(
-            By.XPATH, '//span[@class="woocommerce-Price-amount amount"]'
-        )
-        .find_element(By.TAG_NAME, "bdi")
-        .get_attribute("innerText")
-    )
 
     product_name = driver.find_element(
         By.XPATH, '//h1[@class="product_title entry-title"]'
@@ -94,13 +71,20 @@ def fetch_data_interactive(
     except NoSuchElementException:
         img_url = None
 
-    description = (
-        driver.find_element(By.XPATH, '//div[@id="tab-description"]')
-        .find_element(By.TAG_NAME, "p")
-        .get_attribute("innerText")
-    )
-
-    # option_list = select_element.find_elements(By.TAG_NAME, "option")
+    try:
+        description = (
+            driver.find_element(By.XPATH, '//div[@id="tab-description"]')
+            .find_element(By.TAG_NAME, "p")
+            .get_attribute("innerText")
+        )
+    except NoSuchElementException:
+        try:
+            description = driver.find_element(
+                By.XPATH,
+                '//section[@class="template-article__editor-content editor-content"]',
+            ).get_attribute("innerText")
+        except NoSuchElementException:
+            description = None
 
     for option_value, option_name in [
         (option.get_attribute("value"), option.get_attribute("innerText"))
@@ -133,6 +117,7 @@ def fetch_data_interactive(
                     if p.is_displayed():
                         price = p.get_attribute("innerText")
                         break
+            price_inc_vat = extract_price_from_text(price)
 
             try:
                 stock_str = driver.find_element(
@@ -146,8 +131,8 @@ def fetch_data_interactive(
             except NoSuchElementException:
                 stock = 0
 
-            price_inc_vat = extract_price_from_text(price)
-            size = extract_size_from_text(option_name)
+            # Leave as raw information - we will process this in silver layer
+            size = option_name
 
             results.append(
                 {
@@ -163,7 +148,6 @@ def fetch_data_interactive(
                     "stock": stock,
                 }
             )
-            print(results[-1]["product_name"])
     return results
 
 

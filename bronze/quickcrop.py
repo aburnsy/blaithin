@@ -35,17 +35,9 @@ def selenium_setup() -> webdriver:
 
 
 multibuy_pattern_deal = re.compile(r"(\d+ x \w+)")
-multibuy_pattern_trees = re.compile(r"(\d+ Trees)", flags=re.IGNORECASE)
-multibuy_pattern_multipack = re.compile(r"(\d+ Pack)", flags=re.IGNORECASE)
-
-numeric_pattern_compiled = re.compile(r"(\d+)")
-
-
-multibuy_pattern_deal = re.compile(r"(\d+ x \w+)")
 multibuy_pattern_trees = re.compile(r"(\d+ Tree)", flags=re.IGNORECASE)
 multibuy_pattern_pack = re.compile(r"(\d+ Pack)", flags=re.IGNORECASE)
 multibuy_pattern_plant = re.compile(r"(\d+ Plant)", flags=re.IGNORECASE)
-
 numeric_pattern_compiled = re.compile(r"(\d+)")
 
 
@@ -65,26 +57,26 @@ def extract_quantity_from_text(product_text: str) -> int:
     return quantity
 
 
-size_pattern_litres = re.compile(r"(0?\.?\d+\s?L)")
-size_pattern_centimetres = re.compile(r"(\d+\s?-\s?\d+\s?cm)", flags=re.IGNORECASE)
+# size_pattern_litres = re.compile(r"(0?\.?\d+\s?L)")
+# size_pattern_centimetres = re.compile(r"(\d+\s?-\s?\d+\s?cm)", flags=re.IGNORECASE)
 
 
-def extract_size_from_text(text: str) -> str:
-    size_str = re.search(size_pattern_litres, text)
-    if size_str:
-        size = size_str.group(0).replace(" L", "L")
-    else:
-        size_str = re.search(size_pattern_centimetres, text)
-        if size_str:
-            size = size_str.group(0)
-        else:
-            if "tree" in text.lower() or "crown" in text.lower():
-                size = None
-            elif text.lower() in ["small", "medium", "large"]:
-                size = text.lower()
-            else:
-                size = "9 cm"  # Size isn't specified so we default to 9cm
-    return size
+# def extract_size_from_text(text: str) -> str:
+#     size_str = re.search(size_pattern_litres, text)
+#     if size_str:
+#         size = size_str.group(0).replace(" L", "L")
+#     else:
+#         size_str = re.search(size_pattern_centimetres, text)
+#         if size_str:
+#             size = size_str.group(0)
+#         else:
+#             if "tree" in text.lower() or "crown" in text.lower():
+#                 size = None
+#             elif text.lower() in ["small", "medium", "large"]:
+#                 size = text.lower()
+#             else:
+#                 size = "9 cm"  # Size isn't specified so we default to 9cm
+#     return size
 
 
 def extract_price_from_text(price_str):
@@ -172,7 +164,7 @@ def fetch_data_interactive(
                 stock = 100
 
             price_inc_vat = extract_price_from_text(price)
-            size = extract_size_from_text(option_name)
+            size = option_name
             quantity = extract_quantity_from_text(option_name)
             results.append(
                 {

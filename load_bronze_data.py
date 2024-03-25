@@ -3,6 +3,9 @@ import bronze.tullys as tullys
 import bronze.quickcrop as quickcrop
 import bronze.gardens4you as gardens4you
 import bronze.carragh as carragh
+import bronze.arboretum as arboretum
+
+# import bronze.common as common
 import cloud_storage
 
 
@@ -29,6 +32,11 @@ def main(params):
                 table=carragh.get_product_data("carragh_test"),
                 root_path=root_path,
             )
+        case "arboretum":
+            cloud_storage.export_data_locally(
+                table=arboretum.get_product_data("arboretum"),
+                root_path=root_path,
+            )
         case _:
             cloud_storage.export_data_to_gcs(
                 table=tullys.get_product_data(), root_path=root_path
@@ -43,6 +51,10 @@ def main(params):
                 table=carragh.get_product_data(),
                 root_path=root_path,
             )
+            cloud_storage.export_data_to_gcs(
+                table=arboretum.get_product_data(),
+                root_path=root_path,
+            )
 
 
 if __name__ == "__main__":
@@ -55,9 +67,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--site",
         help="Name of the site you would like to fetch data for.",
-        choices=["tullys", "quickcrop", "gardens4you", "carragh"],
+        choices=["tullys", "quickcrop", "gardens4you", "carragh", "arboretum"],
     )
     args = parser.parse_args()
     main(args)
 
-# d:/Development/blaithin/.venv/Scripts/python.exe d:/Development/blaithin/load_bronze_data.py --bucket_name=$(terraform -chdir=Terraform output -raw bucket_name) --site=gardens4you
+"""
+d:/Development/blaithin/.venv/Scripts/python.exe d:/Development/blaithin/load_bronze_data.py --bucket_name=$(terraform -chdir=Terraform output -raw bucket_name) --site=arboretum
+"""

@@ -1,11 +1,11 @@
 data_sources = [
     [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=FruitTrees",
-        "Fruit Trees",
+        "Fruit",
     ],
     [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=SoftFruit",
-        "Soft Fruit",
+        "Fruit",
     ],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Alpine", "Alpine"],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Bamboo", "Bamboo"],
@@ -24,7 +24,7 @@ data_sources = [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Grass",
         "Grasses & Ferns",
     ],
-    ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Heather", "Heather"],
+    ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Heather", "Shrub"],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Hedging", "Hedging"],
     [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Herbaceous",
@@ -37,11 +37,7 @@ data_sources = [
     ],
     [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=JAP001",
-        "Japanese Acers",
-    ],
-    [
-        "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=RareUnusualPlants",
-        "Rare / Unusual Plants",
+        "Trees",
     ],
     [
         "https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Rose",
@@ -88,7 +84,7 @@ data_sources = [
         "Solitaire",
     ],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Topiary", "Topiary"],
-    ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Tree", "Tree"],
+    ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Tree", "Trees"],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=EVE001", "Evergreen"],
     ["https://shop.tullynurseries.ie/Product/Browse.aspx?Code=Whip", "Whip"],
 ]
