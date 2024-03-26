@@ -1,6 +1,6 @@
 import argparse
 import cloud_storage
-from bronze import rhs_urls, tullys, quickcrop, gardens4you, carragh, arboretum
+from bronze import rhs_urls, tullys, quickcrop, gardens4you, carragh, arboretum, rhs
 
 
 def main(params):
@@ -35,6 +35,11 @@ def main(params):
         case "rhs_urls":
             cloud_storage.export_data_locally(
                 table=rhs_urls.get_plant_urls(),
+                root_path=root_path,
+            )
+        case "rhs":
+            cloud_storage.export_data_locally(
+                table=rhs.get_plants_detail(),
                 root_path=root_path,
             )
         case _:

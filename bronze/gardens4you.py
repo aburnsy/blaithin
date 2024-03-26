@@ -28,7 +28,7 @@ def extract_size_from_url(product_url: str) -> str:
             return "Seeds"
         else:
             raise Exception(f"NOT FOUND for {product_url} with {del_as.text}")
-        return re.search(size_pattern_cm, del_as.text).group(0)
+
     if attr_desc := content.find("div", class_="product attribute description"):
         if elements := attr_desc.select("div"):
             for element in elements:
