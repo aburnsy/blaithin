@@ -1,0 +1,4 @@
+requests-html
+polars==0.20.16
+pyarrow
+bs4

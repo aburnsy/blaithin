@@ -202,7 +202,7 @@ def get_plants_detail(plants: list[dict] = fetch_sample_plants()) -> list[dict] 
     return detailed_plants
 
 
-get_plants_detail()
+# get_plants_detail()
 
 # # get_plants_detail(plants_sample[0:1])
 # for entry in get_plants_detail(plants_sample):

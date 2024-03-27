@@ -15,3 +15,8 @@ composer_env_name=$(terraform -chdir=Terraform output -raw composer_env_name)
 gcs_bucket=$(terraform -chdir=Terraform output -raw gcs_bucket)
 gke_cluster=$(terraform -chdir=Terraform output -raw gke_cluster)
 # echo $bucket_name
+
+
+# sleep 14 && wget http://yoursitehere.com &
+# sleep 18 && wget http://yoursitehere.com &
+# sleep 44 && wget http://yoursitehere.com &

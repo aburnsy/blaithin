@@ -37,11 +37,7 @@ def main(params):
                 table=rhs_urls.get_plant_urls(),
                 root_path=root_path,
             )
-        case "rhs":
-            cloud_storage.export_data_locally(
-                table=rhs.get_plants_detail(),
-                root_path=root_path,
-            )
+
         case _:
             cloud_storage.export_data_to_gcs(
                 table=tullys.get_product_data(), root_path=root_path

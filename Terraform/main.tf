@@ -50,7 +50,7 @@ module "composer_example_simple_composer_env_v2" {
   image_version            = "composer-2-airflow-2"
   scheduler                = { "count" : 1, "cpu" : 1, "memory_gb" : 2, "storage_gb" : 1 }
   web_server               = { "cpu" : 1, "memory_gb" : 2, "storage_gb" : 1 }
-  worker                   = { "cpu" : 4, "max_count" : 3, "memory_gb" : 16, "min_count" : 1, "storage_gb" : 8 }
+  worker                   = { "cpu" : 4, "max_count" : 3, "memory_gb" : 1, "min_count" : 1, "storage_gb" : 8 }
   region                   = var.GCP_REGION
 }
 

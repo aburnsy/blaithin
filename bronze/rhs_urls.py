@@ -87,9 +87,6 @@ def get_plant_urls(plant_types: list = range(1, 22)):
                             "botanical_name": botanical_name_base,
                             "plant_url": plant_url,
                             "source": "rhs_urls",
-                            "plant_type": (
-                                plant_type_str := plant_type_mapping[plant_type]
-                            ),
                         }
                     )
                 offset += page_size
@@ -99,7 +96,7 @@ def get_plant_urls(plant_types: list = range(1, 22)):
                     f"No plants found on RHS website for plant_type = {plant_type}. The site may be down or there may be another problem with the script."
                 )
             print(
-                f"Found {len(temp_plants)} products for '{plant_type_str}' plant type and letter '{keywords}'"
+                f"Found {len(temp_plants)} products for '{plant_type_mapping[plant_type]}' plant type and letter '{keywords}'"
             )
             plants.extend(temp_plants)
 
