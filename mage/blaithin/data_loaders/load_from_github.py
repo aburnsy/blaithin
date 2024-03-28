@@ -47,8 +47,6 @@ def load_data(*args, **kwargs):
     shutil.rmtree(site)
     return df
 
-
-
 @test
 def test_output(output, *args) -> None:
     """

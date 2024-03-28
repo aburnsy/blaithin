@@ -21,7 +21,7 @@ triggers:
   settings: null
   sla: null
   start_time: 2024-03-26 17:01:00
-  status: inactive
+  status: active
   variables:
     plant_type: 2
 - envs: []
