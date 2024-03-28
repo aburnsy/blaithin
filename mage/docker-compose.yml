@@ -4,13 +4,13 @@ services:
     image: mageai/mageai:latest
     command: mage start ${PROJECT_NAME}
     container_name: mage-${PROJECT_NAME}
-    env_file:
-      -  .env
     build:
       context: ./
       dockerfile: Dockerfile
     environment:
       USER_CODE_PATH: /home/src/${PROJECT_NAME}
+      GCS_BUCKET_NAME: ${GCS_BUCKET_NAME}
+      GOOGLE_APPLICATION_CREDENTIALS: /home/config/account_key.json
     ports:
       - 6789:6789
     volumes:

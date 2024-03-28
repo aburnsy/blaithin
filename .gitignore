@@ -176,8 +176,11 @@ mage_data/
 secrets/
 
 # Mage Custom
-mage/app/metadata.yaml
-mage/app/io_config.yaml
+config/account_key.json
+
 
 test/
 playground/
+
+#GCS
+mage

@@ -252,15 +252,3 @@ triggers:
   status: active
   variables:
     plant_type: 21
-- envs: []
-  last_enabled_at: 2024-03-28 06:30:27.847469
-  name: Daily fetch of plant data from RHS for plant type - 22
-  pipeline_uuid: rhs_urls
-  schedule_interval: '@daily'
-  schedule_type: time
-  settings: null
-  sla: null
-  start_time: 2024-03-26 17:21:00
-  status: inactive
-  variables:
-    plant_type: 22
