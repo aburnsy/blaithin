@@ -15,6 +15,6 @@ services:
       - 6789:6789
     volumes:
       - ../config:/home/config
-      - .:/home/src/
+      - ./data:/home/src/
       - ./app:/app/${PROJECT_NAME}/
     restart: on-failure:5
