@@ -1,24 +1,5 @@
 LOW find multipack offers for gardens4you
 LOW carragh - where no dropdown is present
-
 MED - incorrect URL for rhs - follow ups
-HIGH - add logging locations
 
 HIGH - make sure each site has a unique code
-
-
-Call Mage via API
-curl -X POST http://localhost:6789/api/pipeline_schedules/1/pipeline_runs/22570e84094746d4878d9f9a4e3476cd \
-  --header 'Content-Type: application/json' \
-  --data '
-{
-  "pipeline_run": {
-    "variables": {
-      "key1": "value1",
-      "key2": "value2"
-    }
-  }
-}'
-
-
-HIGH - Passwords for MAge if needed?
