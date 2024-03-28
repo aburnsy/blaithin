@@ -159,6 +159,25 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Mage
+.DS_Store
+.file_versions
+.gitkeep
+.log
+.logs/
+.mage_temp_profiles
+.preferences.yaml
+.variables/
+__pycache__/
+docker-compose.override.yml
+logs/
+mage-ai.db
+mage_data/
+secrets/
+
+# Mage Custom
+mage/app/metadata.yaml
+mage/app/io_config.yaml
+
 test/
 playground/
-mage/mage_data
