@@ -42,6 +42,8 @@ This will run x, y , z
 ```
 
 ### 3. Backfill historical data
+Once Docker runs, the historic data should run from Mage
+
 As the data for the project is scraped from the web using BS4, no historic data is available. As such, without backfilling, the temporal charts will not have anything to show. 
 
 I have collected historical data for a number of weeks which can be used.

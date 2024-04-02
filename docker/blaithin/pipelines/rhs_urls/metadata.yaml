@@ -3,7 +3,7 @@ blocks:
   color: null
   configuration: {}
   downstream_blocks:
-  - determine_url
+  - rhs_remove_duplicates
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -18,6 +18,23 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
+  downstream_blocks:
+  - determine_url
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: rhs remove duplicates
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_from_rhs_api
+  uuid: rhs_remove_duplicates
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
@@ -29,7 +46,7 @@ blocks:
   timeout: null
   type: transformer
   upstream_blocks:
-  - load_from_rhs_api
+  - rhs_remove_duplicates
   uuid: determine_url
 cache_block_output_in_memory: false
 callbacks: []
@@ -56,6 +73,7 @@ tags:
 type: python
 uuid: rhs_urls
 variables:
-  plant_type: 21
+  plant_types:
+  - 21
 variables_dir: /home/src/mage_data/blaithin
 widgets: []

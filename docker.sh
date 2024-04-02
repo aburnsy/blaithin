@@ -4,4 +4,4 @@
 export PROJECT_NAME=blaithin
 export GCS_BUCKET_NAME=$(terraform -chdir=Terraform output -raw bucket_name)
 
-cd mage && docker compose up -d
+cd docker && docker compose up -d

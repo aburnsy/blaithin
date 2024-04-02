@@ -1,0 +1,128 @@
+triggers:
+- envs: []
+  last_enabled_at: 2024-03-28 06:30:27.725969+00:00
+  name: Daily fetch of product data from site arboretum
+  pipeline_uuid: product_data
+  schedule_interval: '@daily'
+  schedule_type: time
+  settings:
+    landing_time_enabled: false
+  sla: null
+  start_time: 2024-03-26 16:00:00
+  status: active
+  variables:
+    site: arboretum
+- envs: []
+  last_enabled_at: 2024-03-28 06:30:27.847469
+  name: Daily fetch of product data from site carragh
+  pipeline_uuid: product_data
+  schedule_interval: '@daily'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:01:00
+  status: active
+  variables:
+    site: carragh
+- envs: []
+  last_enabled_at: 2024-03-28 06:30:27.847469+00:00
+  name: Daily fetch of product data from site gardens4you
+  pipeline_uuid: product_data
+  schedule_interval: '@daily'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:02:00
+  status: active
+  variables:
+    site: gardens4you
+- envs: []
+  last_enabled_at: 2024-03-28 06:30:27.847469+00:00
+  name: Daily fetch of product data from site quickcrop
+  pipeline_uuid: product_data
+  schedule_interval: '@daily'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:03:00
+  status: active
+  variables:
+    site: quickcrop
+- envs: []
+  last_enabled_at: 2024-03-28 06:30:27.847469+00:00
+  name: Daily fetch of product data from site tullys
+  pipeline_uuid: product_data
+  schedule_interval: '@daily'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:04:00
+  status: active
+  variables:
+    site: tullys
+- envs: []
+  last_enabled_at: 2024-03-28 17:56:24.704136+00:00
+  name: Initial fetch of product data from site arboretum
+  pipeline_uuid: product_data
+  schedule_interval: '@once'
+  schedule_type: time
+  settings:
+    landing_time_enabled: false
+  sla: null
+  start_time: 2024-03-26 16:00:00
+  status: active
+  variables:
+    load_all_flag: load_all_flag
+    site: arboretum
+- envs: []
+  last_enabled_at: 2024-03-28 17:56:24.745529+00:00
+  name: Initial fetch of product data from site carragh
+  pipeline_uuid: product_data
+  schedule_interval: '@once'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:01:00
+  status: active
+  variables:
+    load_all_flag: load_all_flag
+    site: carragh
+- envs: []
+  last_enabled_at: 2024-03-28 17:56:24.784226+00:00
+  name: Initial fetch of product data from site gardens4you
+  pipeline_uuid: product_data
+  schedule_interval: '@once'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:02:00
+  status: active
+  variables:
+    load_all_flag: load_all_flag
+    site: gardens4you
+- envs: []
+  last_enabled_at: 2024-03-28 17:56:24.826471+00:00
+  name: Initial fetch of product data from site quickcrop
+  pipeline_uuid: product_data
+  schedule_interval: '@once'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:03:00
+  status: active
+  variables:
+    load_all_flag: load_all_flag
+    site: quickcrop
+- envs: []
+  last_enabled_at: 2024-03-28 17:56:24.867972+00:00
+  name: Initial fetch of product data from site tullys
+  pipeline_uuid: product_data
+  schedule_interval: '@once'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:04:00
+  status: active
+  variables:
+    load_all_flag: load_all_flag
+    site: tullys

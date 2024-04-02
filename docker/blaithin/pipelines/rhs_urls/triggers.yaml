@@ -1,0 +1,26 @@
+triggers:
+- envs: []
+  last_enabled_at: 2024-03-28 06:30:27.725969+00:00
+  name: Daily fetch of plant data from RHS for all plant types
+  pipeline_uuid: rhs_urls
+  schedule_interval: '@daily'
+  schedule_type: time
+  settings:
+    landing_time_enabled: false
+  sla: null
+  start_time: 2024-03-26 17:00:00
+  status: active
+  variables:
+    plant_type: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
+- envs: []
+  last_enabled_at: 2024-03-28 17:56:24.826471+00:00
+  name: Initial fetch of rhs data
+  pipeline_uuid: rhs_urls
+  schedule_interval: '@once'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:00:00
+  status: active
+  variables:
+    plant_type: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
