@@ -2,7 +2,8 @@ if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
-
+from thefuzz import fuzz
+from thefuzz import process
 
 @data_loader
 def load_data(*args, **kwargs):
@@ -13,7 +14,7 @@ def load_data(*args, **kwargs):
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
     # Specify your data loading logic here
-
+    return fuzz.ratio("this is a test", "this is a test!")
     return {}
 
 

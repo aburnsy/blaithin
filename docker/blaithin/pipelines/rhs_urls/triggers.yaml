@@ -11,7 +11,7 @@ triggers:
     skip_if_previous_running: true
   sla: null
   start_time: 2024-03-26 17:00:00
-  status: active
+  status: inactive
   variables:
     plant_types:
     - 1

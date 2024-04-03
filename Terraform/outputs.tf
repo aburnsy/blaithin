@@ -4,3 +4,7 @@ output "bucket_name" {
 output "big_query_table" {
   value = google_bigquery_table.rhs.id
 }
+
+output "gcp_project" {
+  value = var.GCP_PROJECT
+}

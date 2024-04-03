@@ -52,3 +52,18 @@ resource "google_bigquery_table" "rhs" {
   }
   depends_on = [google_storage_bucket.blaithin_bucket]
 }
+
+resource "google_bigquery_table" "products" {
+  dataset_id = google_bigquery_dataset.blaithin.dataset_id
+  table_id   = "products"
+
+  external_data_configuration {
+    autodetect    = true
+    source_format = "PARQUET"
+
+    source_uris = [
+      "gs://${google_storage_bucket.blaithin_bucket.name}/products/*.parquet",
+    ]
+  }
+  depends_on = [google_storage_bucket.blaithin_bucket]
+}

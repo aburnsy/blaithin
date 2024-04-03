@@ -1,7 +1,0 @@
-requests-html
-polars
-pyarrow
-argparse
-selenium
-bs4
-# webdriver_manager

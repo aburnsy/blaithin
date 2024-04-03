@@ -10,6 +10,7 @@ services:
     environment:
       USER_CODE_PATH: /home/src/${PROJECT_NAME}
       GCS_BUCKET_NAME: ${GCS_BUCKET_NAME}
+      GCP_PROJECT: ${GCP_PROJECT}
       GOOGLE_APPLICATION_CREDENTIALS: /home/config/account_key.json
     ports:
       - 6789:6789
