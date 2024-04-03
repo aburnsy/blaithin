@@ -95,5 +95,6 @@ uuid: rhs_urls
 variables:
   plant_types:
   - 17
+  - 21
 variables_dir: /home/src/mage_data/blaithin
 widgets: []

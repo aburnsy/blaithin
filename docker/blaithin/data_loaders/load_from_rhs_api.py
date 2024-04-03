@@ -71,15 +71,15 @@ def load_data_from_api(*args, **kwargs):
                     headers=headers,
                 )
             ).status_code == 200:
-                results = json.loads(response.text)["hits"]
-                if len(results) == 0:
+                hits = json.loads(response.text)["hits"]
+                if len(hits) == 0:
                     # We have reached the end of this structure
                     break
-                for result in results:
+                for hit in hits:
                     temp_plants.append(
                         {
-                            "id": result["id"],
-                            "botanical_name": BeautifulSoup(result["botanicalName"], "html.parser").text.strip(),
+                            "id": hit["id"],
+                            "botanical_name": BeautifulSoup(hit["botanicalName"], "html.parser").text.strip(),
                         }
                     )
                 offset += page_size
@@ -91,7 +91,6 @@ def load_data_from_api(*args, **kwargs):
         
         results.extend(plants)
         print(f"Total Found: {len(plants)} for '{plant_type_mapping[int(plant_type)]}'")  
-
     return pl.DataFrame(results)
 
 

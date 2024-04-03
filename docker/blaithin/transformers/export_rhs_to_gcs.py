@@ -36,4 +36,6 @@ def export_data_to_google_cloud_storage(data, **kwargs) -> None:
         existing_data_behavior='delete_matching',
     )
 
+    print(f"Exported {len(data)} records to GCS")
+
     return data

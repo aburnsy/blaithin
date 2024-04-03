@@ -1,6 +1,10 @@
 from requests_html import HTMLSession
+from requests_html import AsyncHTMLSession
 from bs4 import BeautifulSoup
 import polars as pl
+import time
+
+asession = AsyncHTMLSession()
 
 
 def extract_detailed_plant_data(plant: dict, session: HTMLSession) -> dict:
@@ -13,7 +17,9 @@ def extract_detailed_plant_data(plant: dict, session: HTMLSession) -> dict:
             f"Given plant URL '{plant_url}' is incorrect. Plant botanical name: \"{botanical_name}\" and id {id}"
         )
         return []
+    plant_page.html.render()
     plant_content = BeautifulSoup(plant_page.content, "html.parser")
+    print(plant_content)
 
     try:
         common_name = plant_content.find("p", class_="summary summary--sub").text
@@ -136,6 +142,9 @@ def extract_detailed_plant_data(plant: dict, session: HTMLSession) -> dict:
                 exp.text.replace(" or ", "") for exp in expos_hard[0].find_all("span")
             ]
             hardiness = expos_hard[1].find_all("span")[-1].text
+
+    print(plant_content.find_all("div"))
+
     bottom_panel = plant_content.find("div", class_="panel__body").find_all(string=True)
     bottom_panel = [entry for entry in bottom_panel if entry.strip() != ""]
     i = 0
@@ -202,7 +211,14 @@ def get_plants_detail(plants: list[dict] = fetch_sample_plants()) -> list[dict] 
     return detailed_plants
 
 
-# get_plants_detail()
+extract_detailed_plant_data(
+    {
+        "id": "6324",
+        "botanical_name": "Eleocharis acicularis",
+        "plant_url": "https://www.rhs.org.uk/plants/6324/eleocharis-acicularis/details",
+    },
+    session=HTMLSession(),
+)
 
 # # get_plants_detail(plants_sample[0:1])
 # for entry in get_plants_detail(plants_sample):

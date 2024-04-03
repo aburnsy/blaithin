@@ -34,10 +34,10 @@ def transform(messages: List[Dict], *args, **kwargs):
         try:
             common_name = plant_content.find("p", class_="summary summary--sub").text
             if common_name == "":
-                print(f"Cannot find common name for plant {plant_url}")
+                # print(f"Cannot find common name for plant {plant_url}")
                 common_name = None
         except AttributeError:
-            print(f"Cannot find common name for plant {plant_url}")
+            # print(f"Cannot find common name for plant {plant_url}")
             common_name = None
 
         try:
@@ -137,41 +137,55 @@ def transform(messages: List[Dict], *args, **kwargs):
                     # )
                     # print(df)
             elif panel_heading == "position":
-                sun_exposure = [
-                    se.text
-                    for se in plant_attributes_panel.find(
-                        "ul", class_="list-inline ng-star-inserted"
-                    ).find_all("li")
-                ]
+                try:
+                    sun_exposure = [
+                        se.text
+                        for se in plant_attributes_panel.find(
+                            "ul", class_="list-inline ng-star-inserted"
+                        ).find_all("li")
+                    ]
 
-                aspect = [
-                    asp.text.replace("\x80\x93", "-").replace("â", "").replace(" or ", "")
-                    for asp in plant_attributes_panel.find("p").find_all("span")
-                ]
+                    aspect = [
+                        asp.text.replace("\x80\x93", "-").replace("â", "").replace(" or ", "")
+                        for asp in plant_attributes_panel.find("p").find_all("span")
+                    ]
 
-                expos_hard = plant_attributes_panel.find(
-                    "div", class_="l-row l-row--space l-row--auto-clear"
-                ).find_all("div", class_="l-module")
-                exposure = [
-                    exp.text.replace(" or ", "") for exp in expos_hard[0].find_all("span")
-                ]
-                hardiness = expos_hard[1].find_all("span")[-1].text
-        bottom_panel = plant_content.find("div", class_="panel__body").find_all(string=True)
-        bottom_panel = [entry for entry in bottom_panel if entry.strip() != ""]
-        i = 0
-        while i < len(bottom_panel):
-            value = bottom_panel[i]
-            if str(value).strip().endswith(" or") or str(value).strip().endswith(","):
-                bottom_panel[i] = bottom_panel[i] + bottom_panel[i + 1]
-                del bottom_panel[i + 1]
-                i -= 1
-            i += 1
+                    expos_hard = plant_attributes_panel.find(
+                        "div", class_="l-row l-row--space l-row--auto-clear"
+                    ).find_all("div", class_="l-module")
+                    exposure = [
+                        exp.text.replace(" or ", "") for exp in expos_hard[0].find_all("span")
+                    ]
+                    hardiness = expos_hard[1].find_all("span")[-1].text
+                except AttributeError:
+                    sun_exposure = None
+                    aspect = None
+                    exposure = None
+                    hardiness = None
+        try:
+            bottom_panel = plant_content.find("div", class_="panel__body").find_all(string=True)
+            bottom_panel = [entry for entry in bottom_panel if entry.strip() != ""]
+            i = 0
+            while i < len(bottom_panel):
+                value = bottom_panel[i]
+                if str(value).strip().endswith(" or") or str(value).strip().endswith(","):
+                    bottom_panel[i] = bottom_panel[i] + bottom_panel[i + 1]
+                    del bottom_panel[i + 1]
+                    i -= 1
+                i += 1
 
-        bottom_panel_dict = {}
-        for key, value in zip(bottom_panel[0::2], bottom_panel[1::2]):
-            bottom_panel_dict[key] = value
-        foliage = [entry.strip() for entry in bottom_panel_dict["Foliage"].split(" or ")]
-        habit = [entry.strip() for entry in bottom_panel_dict["Habit"].split(",")]
+            bottom_panel_dict = {}
+            for key, value in zip(bottom_panel[0::2], bottom_panel[1::2]):
+                bottom_panel_dict[key] = value
+            foliage = [entry.strip() for entry in bottom_panel_dict["Foliage"].split(" or ")]
+            habit = [entry.strip() for entry in bottom_panel_dict["Habit"].split(",")]
+        except AttributeError:
+            # print(f"Cannot find bottom_panel for plant {plant_url}")
+            foliage = None
+            habit = None
+        except KeyError:
+            foliage = None
+            habit = None            
 
         extract = {
             "id": id_,
@@ -197,6 +211,6 @@ def transform(messages: List[Dict], *args, **kwargs):
             "foliage": foliage,
             "habit": habit,
         }
-
+        # print(f"Processed url: {plant_url}")
         detailed_plants.append(extract)
     return detailed_plants
