@@ -1,0 +1,7 @@
+connector_type: google_cloud_storage
+bucket: {{ env_var('GCS_BUCKET_NAME') }}
+prefix: rhs
+file_type: parquet
+buffer_size_mb: 5
+buffer_timeout_seconds: 20
+path_to_credentials_json_file: /home/config/account_key.json

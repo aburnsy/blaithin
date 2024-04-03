@@ -4,6 +4,7 @@ topic: rhs_urls
 consumer_group: rhs_urls_1
 include_metadata: false
 api_version: 0.10.2
+batch_size: 2
 
 # Uncomment the config below to use SSL config
 # security_protocol: "SSL"

@@ -17,6 +17,7 @@ def transform(messages: List[Dict], *args, **kwargs):
     Returns:
         Transformed messages
     """
+    session = HTMLSession()
     detailed_plants = []
     for msg in messages:
         id_ = msg['id']
@@ -81,6 +82,7 @@ def transform(messages: List[Dict], *args, **kwargs):
                             .strip()
                             .replace("–", "-")
                             .replace("â", "-")
+                            .replace("-\x80\x93","-")
                         )
                     elif attribute.find(lambda tag: "Ultimate spread" in tag.text):
                         spread = (
@@ -88,6 +90,7 @@ def transform(messages: List[Dict], *args, **kwargs):
                             .strip()
                             .replace("–", "-")
                             .replace("â", "-")
+                            .replace("-\x80\x93","-")
                         )
                     elif attribute.find(lambda tag: "Time to ultimate height" in tag.text):
                         time_to_ultimate_spread = (
@@ -95,6 +98,7 @@ def transform(messages: List[Dict], *args, **kwargs):
                             .strip()
                             .replace("–", "-")
                             .replace("â", "-")
+                            .replace("-\x80\x93","-")
                         )
             elif panel_heading == "growing conditions":
                 soils = [
@@ -110,6 +114,7 @@ def transform(messages: List[Dict], *args, **kwargs):
                             .text.strip()
                             .replace("–", "-")
                             .replace("â", "-")
+                            .replace("-\x80\x93","-")
                         )
                     elif attribute.find(lambda tag: "pH" in tag.text):
                         ph = [
@@ -165,12 +170,11 @@ def transform(messages: List[Dict], *args, **kwargs):
         bottom_panel_dict = {}
         for key, value in zip(bottom_panel[0::2], bottom_panel[1::2]):
             bottom_panel_dict[key] = value
-        for k, v in bottom_panel_dict.items():
-            print(f"{k:<25}: {v}")
         foliage = [entry.strip() for entry in bottom_panel_dict["Foliage"].split(" or ")]
         habit = [entry.strip() for entry in bottom_panel_dict["Habit"].split(",")]
 
         extract = {
+            "id": id_,
             "source": "rhs",
             "plant_url": plant_url,
             "botanical_name": botanical_name,
@@ -185,7 +189,7 @@ def transform(messages: List[Dict], *args, **kwargs):
             "soils": soils,
             "moisture": moisture,
             "ph": ph,
-            "colour_and_scent": colour_and_scent,
+            #"colour_and_scent": colour_and_scent,
             "sun_exposure": sun_exposure,
             "aspect": aspect,
             "exposure": exposure,
@@ -193,7 +197,6 @@ def transform(messages: List[Dict], *args, **kwargs):
             "foliage": foliage,
             "habit": habit,
         }
-        print(extract)
+        # print(extract)
         detailed_plants.append(extract)
-    
     return detailed_plants
