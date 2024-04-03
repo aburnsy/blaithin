@@ -184,3 +184,5 @@ playground/
 
 #GCS
 # mage/mage_data/
+
+.vscode

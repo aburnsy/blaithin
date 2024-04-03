@@ -27,3 +27,28 @@ resource "google_storage_bucket" "blaithin_bucket" {
   force_destroy               = true
   public_access_prevention    = "enforced" # Don't allow public access
 }
+
+
+
+resource "google_bigquery_dataset" "blaithin" {
+  dataset_id                  = "blaithin"
+  description                 = "This dataset contains the rhs detailed data."
+  location                    = var.GCP_BUCKET_LOCATION
+  default_table_expiration_ms = 999999999
+
+}
+
+resource "google_bigquery_table" "rhs" {
+  dataset_id = google_bigquery_dataset.blaithin.dataset_id
+  table_id   = "rhs"
+
+  external_data_configuration {
+    autodetect    = true
+    source_format = "PARQUET"
+
+    source_uris = [
+      "gs://${google_storage_bucket.blaithin_bucket.name}/rhs/*.parquet",
+    ]
+  }
+  depends_on = [google_storage_bucket.blaithin_bucket]
+}
