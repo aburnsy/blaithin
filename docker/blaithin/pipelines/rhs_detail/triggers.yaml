@@ -1,0 +1,12 @@
+triggers:
+- envs: []
+  last_enabled_at: 2024-04-03 10:03:23.854603
+  name: Kick off rhs_detail consumer sink
+  pipeline_uuid: rhs_detail
+  schedule_interval: '@once'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2024-03-26 16:00:00
+  status: active
+  variables: {}

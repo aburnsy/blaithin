@@ -41,6 +41,7 @@ def load_data_from_api(*args, **kwargs):
     
     results = []
     plant_types = kwargs['plant_types']
+    print(plant_types)
 
     for plant_type in plant_types:
 

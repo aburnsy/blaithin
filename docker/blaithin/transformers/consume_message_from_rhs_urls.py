@@ -197,6 +197,6 @@ def transform(messages: List[Dict], *args, **kwargs):
             "foliage": foliage,
             "habit": habit,
         }
-        # print(extract)
+
         detailed_plants.append(extract)
     return detailed_plants

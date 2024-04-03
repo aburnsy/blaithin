@@ -1,10 +1,10 @@
 connector_type: kafka
 bootstrap_server: "kafka:29092"
 topic: rhs_urls
-consumer_group: rhs_urls_1
+consumer_group: {{ variables('consumer_group') }}
 include_metadata: false
 api_version: 0.10.2
-batch_size: 2
+batch_size: 10
 
 # Uncomment the config below to use SSL config
 # security_protocol: "SSL"

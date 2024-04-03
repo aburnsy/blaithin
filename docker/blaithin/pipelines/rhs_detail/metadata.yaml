@@ -10,7 +10,7 @@ blocks:
   language: yaml
   name: connect_kafka_to_rhs_urls
   retry_config: null
-  status: failed
+  status: updated
   timeout: null
   type: data_loader
   upstream_blocks: []
@@ -19,7 +19,7 @@ blocks:
   color: null
   configuration: {}
   downstream_blocks:
-  - export_rhs_data_to_gcs
+  - export_rhs_to_gcs
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -35,19 +35,36 @@ blocks:
 - all_upstream_blocks_executed: false
   color: null
   configuration: {}
+  downstream_blocks:
+  - dummy_export_of_rhs_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: export_rhs_to_gcs
+  retry_config: null
+  status: updated
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - consume_message_from_rhs_urls
+  uuid: export_rhs_to_gcs
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: yaml
-  name: export_rhs_data_to_gcs
+  name: dummy_export_of_rhs_data
   retry_config: null
-  status: updated
+  status: not_executed
   timeout: null
   type: data_exporter
   upstream_blocks:
-  - consume_message_from_rhs_urls
-  uuid: export_rhs_data_to_gcs
+  - export_rhs_to_gcs
+  uuid: dummy_export_of_rhs_data
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -56,7 +73,7 @@ created_at: '2024-04-03 07:20:37.384908+00:00'
 data_integration: null
 description: 'Fetches detailed data from RHS for provided URL '
 executor_config: {}
-executor_count: 1
+executor_count: 4
 executor_type: null
 extensions: {}
 name: rhs_detail
@@ -71,5 +88,6 @@ tags:
 - streaming
 type: streaming
 uuid: rhs_detail
+variables: {}
 variables_dir: /home/src/mage_data/blaithin
 widgets: []

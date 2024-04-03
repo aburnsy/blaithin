@@ -11,9 +11,30 @@ triggers:
   start_time: 2024-03-26 17:00:00
   status: active
   variables:
-    plant_type: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
+    plant_types:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
 - envs: []
-  last_enabled_at: 2024-03-28 17:56:24.826471+00:00
+  last_enabled_at: 2024-03-28 17:56:24.826471
   name: Initial fetch of rhs data
   pipeline_uuid: rhs_urls
   schedule_interval: '@once'
@@ -23,4 +44,25 @@ triggers:
   start_time: 2024-03-26 16:00:00
   status: active
   variables:
-    plant_type: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21
+    plant_types:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21

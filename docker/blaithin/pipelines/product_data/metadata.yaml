@@ -37,7 +37,7 @@ concurrency_config: {}
 conditionals: []
 created_at: '2024-03-28 07:05:30.896640+00:00'
 data_integration: null
-description: null
+description: Fetch product data from github and store to GCS
 executor_config: {}
 executor_count: 1
 executor_type: null
