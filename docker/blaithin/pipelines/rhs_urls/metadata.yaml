@@ -10,12 +10,12 @@ blocks:
   language: python
   name: load_from_rhs_api
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: load_from_rhs_api
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
@@ -32,7 +32,7 @@ blocks:
   upstream_blocks:
   - load_from_rhs_api
   uuid: rhs_remove_duplicates
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
@@ -49,7 +49,7 @@ blocks:
   upstream_blocks:
   - rhs_remove_duplicates
   uuid: determine_url
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks: []
@@ -94,7 +94,6 @@ type: python
 uuid: rhs_urls
 variables:
   plant_types:
-  - 21
-  - 18
+  - 17
 variables_dir: /home/src/mage_data/blaithin
 widgets: []

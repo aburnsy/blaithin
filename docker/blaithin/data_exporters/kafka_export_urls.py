@@ -24,6 +24,8 @@ def export_data(data, *args, **kwargs):
     )
 
 
+    print(f"Shape of df to be sent via kafka: {data.shape}")
+
     for row in data.rows(named=True):
         message = {
             'id': row['id'],

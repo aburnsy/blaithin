@@ -4,7 +4,6 @@ if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 
 import polars as pl 
-import pandas as pd
 
 pl.Config.restore_defaults()
 

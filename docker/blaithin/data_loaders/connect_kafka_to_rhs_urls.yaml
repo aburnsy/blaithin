@@ -4,7 +4,7 @@ topic: rhs_urls
 consumer_group: {{ variables('consumer_group') }}
 include_metadata: false
 api_version: 0.10.2
-batch_size: 10
+batch_size: 100
 
 # Uncomment the config below to use SSL config
 # security_protocol: "SSL"
