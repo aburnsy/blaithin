@@ -50,7 +50,8 @@ run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags: []
+tags:
+- daily
 type: python
 uuid: product_data
 variables:

@@ -35,7 +35,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - kafka_export_urls
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -48,6 +49,22 @@ blocks:
   upstream_blocks:
   - rhs_remove_duplicates
   uuid: determine_url
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: kafka_export_urls
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - determine_url
+  uuid: kafka_export_urls
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -63,7 +80,10 @@ extensions: {}
 name: rhs_urls
 notification_config: {}
 remote_variables_dir: null
-retry_config: {}
+retry_config:
+  delay: 60
+  exponential_backoff: true
+  retries: 3
 run_pipeline_in_one_process: false
 settings:
   triggers: null
