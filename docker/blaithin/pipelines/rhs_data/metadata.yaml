@@ -3,18 +3,18 @@ blocks:
   color: null
   configuration: {}
   downstream_blocks:
-  - export_to_gcs
+  - export_rhs_to_gcs
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: load_from_github
+  name: load_rhs_from_github
   retry_config: null
   status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
-  uuid: load_from_github
+  uuid: load_rhs_from_github
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
@@ -23,26 +23,26 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: python
-  name: export_to_gcs
+  name: export_rhs_to_gcs
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
-  - load_from_github
-  uuid: export_to_gcs
+  - load_rhs_from_github
+  uuid: export_rhs_to_gcs
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2024-03-28 07:05:30.896640+00:00'
+created_at: '2024-04-05 05:12:03.829497+00:00'
 data_integration: null
-description: Fetch product data from github and store to GCS
+description: null
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: product_data
+name: rhs_data
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -50,12 +50,8 @@ run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags:
-- daily
+tags: []
 type: python
-uuid: product_data
-variables:
-  load_all_flag: load_all_flag
-  site: tullys
+uuid: rhs_data
 variables_dir: /home/src/mage_data/blaithin
 widgets: []
