@@ -55,7 +55,6 @@ tags:
 type: python
 uuid: product_data
 variables:
-  load_all_flag: load_all_flag
   site: tullys
 variables_dir: /home/src/mage_data/blaithin
 widgets: []
