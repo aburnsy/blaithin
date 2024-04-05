@@ -47,7 +47,7 @@ resource "google_bigquery_table" "rhs" {
     source_format = "PARQUET"
 
     source_uris = [
-      "gs://${google_storage_bucket.blaithin_bucket.name}/rhs/*.parquet",
+      "gs://${google_storage_bucket.blaithin_bucket.name}/rhs/rhs.parquet",
     ]
   }
   depends_on = [google_storage_bucket.blaithin_bucket]
@@ -63,6 +63,21 @@ resource "google_bigquery_table" "products" {
 
     source_uris = [
       "gs://${google_storage_bucket.blaithin_bucket.name}/products/*.parquet",
+    ]
+  }
+  depends_on = [google_storage_bucket.blaithin_bucket]
+}
+
+resource "google_bigquery_table" "matches" {
+  dataset_id = google_bigquery_dataset.blaithin.dataset_id
+  table_id   = "matches"
+
+  external_data_configuration {
+    autodetect    = true
+    source_format = "PARQUET"
+
+    source_uris = [
+      "gs://${google_storage_bucket.blaithin_bucket.name}/matches/matches.parquet",
     ]
   }
   depends_on = [google_storage_bucket.blaithin_bucket]

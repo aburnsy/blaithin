@@ -2,8 +2,7 @@ if 'transformer' not in globals():
     from mage_ai.data_preparation.decorators import transformer
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
-from thefuzz import process
-import polars as pl
+
 
 @transformer
 def transform(data, *args, **kwargs):
@@ -20,16 +19,10 @@ def transform(data, *args, **kwargs):
     Returns:
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
+    # Specify your transformation logic here
     
-    data = pl.DataFrame(data)
-    print(len(data))
 
-    common_name_plants = data[['common_name','plant_url']].drop_nulls().rename({"common_name": "name"})
-    botanical_name_plants = data[['botanical_name','plant_url']].drop_nulls().rename({"botanical_name": "name"})
-
-    plants = pl.concat([common_name_plants,botanical_name_plants]).unique() # Unique here just in case there are dupes
-
-    return plants
+    return data.unique()
 
 
 @test

@@ -21,7 +21,7 @@ def load_data_from_big_query(*args, **kwargs):
 
     GCP_PROJECT = environ.get('GCP_PROJECT')
 
-    plants_query = f'SELECT botanical_name, common_name, plant_url FROM `{GCP_PROJECT}.blaithin.rhs`'
+    plants_query = f'SELECT botanical_name, common_name, id FROM `{GCP_PROJECT}.blaithin.rhs`'
     plants = BigQuery.with_config(ConfigFileLoader(config_path, config_profile)).load(plants_query)
 
     return plants

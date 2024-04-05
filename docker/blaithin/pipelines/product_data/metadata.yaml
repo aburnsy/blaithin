@@ -25,7 +25,7 @@ blocks:
   language: python
   name: export_to_gcs
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
@@ -55,6 +55,7 @@ tags:
 type: python
 uuid: product_data
 variables:
-  site: tullys
+  load_all_flag: load_all_flag
+  site: gardens4you
 variables_dir: /home/src/mage_data/blaithin
 widgets: []

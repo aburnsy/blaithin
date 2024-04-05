@@ -26,7 +26,7 @@ def export_data_to_google_cloud_storage(df: pl.DataFrame, **kwargs) -> None:
     input_dates = df.select('input_date').to_series(0).unique().to_list()
     for input_date in input_dates:  
 
-        where = f'{bucket_name}/products/{source}/{input_date}'
+        where = f'{bucket_name}/products/{source}_{input_date}.parquet'
 
         table = df.filter(pl.col('input_date') == input_date).to_arrow()
 
