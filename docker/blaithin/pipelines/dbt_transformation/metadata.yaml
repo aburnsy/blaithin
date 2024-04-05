@@ -1,0 +1,99 @@
+blocks:
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    file_path: dbt/blaithin/models/core/fct_products.sql
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: models/core/fct_products
+  retry_config: null
+  status: failed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - models/staging/stg_matches
+  - models/staging/stg_rhs
+  - models/staging/stg_products
+  uuid: models/core/fct_products
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_path: dbt/blaithin/models/staging/stg_matches.sql
+  downstream_blocks:
+  - models/core/fct_products
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: models/staging/stg_matches
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks: []
+  uuid: models/staging/stg_matches
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_path: dbt/blaithin/models/staging/stg_products.sql
+  downstream_blocks:
+  - models/core/fct_products
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: models/staging/stg_products
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks: []
+  uuid: models/staging/stg_products
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_path: dbt/blaithin/models/staging/stg_rhs.sql
+  downstream_blocks:
+  - models/core/fct_products
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: models/staging/stg_rhs
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks: []
+  uuid: models/staging/stg_rhs
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-04-05 12:35:45.935055+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: dbt_transformation
+notification_config: {}
+remote_variables_dir: null
+retry_config:
+  delay: 60
+  exponential_backoff: true
+  max_delay: 300
+  retries: 20
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: dbt_transformation
+variables_dir: /home/src/mage_data/blaithin
+widgets: []
