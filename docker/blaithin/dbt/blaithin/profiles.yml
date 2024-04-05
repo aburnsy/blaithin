@@ -1,12 +1,10 @@
-# https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml
-
-base:
-  target: default
+blaithin:
+  target: dev
   outputs:
     dev:
       type: bigquery
       method: service-account
       project: 	{{ env_var('GCP_PROJECT') }}
       dataset: blaithin
-      threads: 4 # Must be a value of 1 or greater
+      threads: 4
       keyfile: {{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}
