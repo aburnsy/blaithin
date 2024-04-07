@@ -1,15 +1,17 @@
 # blaithin
-My submission for the Data Engineering Zoomcamp 2024
+
 
 
 # Goal of Blaithin
 The motivation behind this project was to provide gardeners and aspiring gardeners in Ireland with a simplified tool for facilitating plant selection for their gardens. 
 
-Gardening is a fantastic hobby which comes with a wealth of benefits. However, it can be daunting for beginners to understand where to start. They may not select plants which are ideal for their space. They may purchase a plant which requires a very specific type of soil (ericaceous etc) or which is invasive and will take over their space. 
+Gardening is a fantastic hobby which comes with a wealth of benefits. However, it can be daunting for beginners to understand where to start. They may not select plants which are ideal for their space. They may purchase a plant which requires a very specific type of soil (ericaceous etc) or which will grop too big for their space. 
 
-There is also a vast differential in prices across the main nurseries in Ireland. The same product in 1 nursery may be over twice the price in another nursery for comparable quality and size. Give examples. 
+There is also a vast differential in prices across the main nurseries in Ireland. The same product in 1 nursery may be over twice the price in another nursery for comparable quality and size. 
 
 As someone who is passionate about gardening, I find the process of buying new plants very frustrating. I research new plants/ideas on a number of different websites. With my selections in mind, I then have search through many known nurseries which deliver to my location to determine which has the best pricing including delivery fees (which can be up to €60 in some cases).
+
+![Example showing the Looker dashboard for Blaithin](example.gif)
 
 # Future Plans for Blaithin
 For now, we are parsing data manually to understand sizing, quantity and categorisation. This would be a great candidate for machine learning. 

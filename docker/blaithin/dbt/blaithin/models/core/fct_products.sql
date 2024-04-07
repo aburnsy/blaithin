@@ -4,13 +4,9 @@ with stg_products as  (
 
 max_date as (
     select
-        max(input_date) as input_date
+        max(input_date) as input_date,
+        1 as max_date_flag
     from stg_products
-),
-
-latest_products as (
-    select * from stg_products
-    join max_date using (input_date)
 ),
 
 matches as  (
@@ -35,7 +31,7 @@ products_fact as (
         stock,
         quantity,
         case when quantity > 0 then True else False end as is_bulk_deal,
-        -- input_date
+        input_date as for_sale_date,
         plant_url,
         botanical_name,
         common_name,
@@ -54,10 +50,12 @@ products_fact as (
         exposure,
         hardiness,
         foliage,
-        habit    
-    from latest_products p
+        habit,
+        max_date_flag
+    from stg_products p
     inner join matches m on p.product_name = m.product_name
     inner join rhs on m.id = rhs.id
+    left join max_date using (input_date)
 )
 
 select * from products_fact

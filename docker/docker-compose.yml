@@ -18,11 +18,3 @@ services:
       - ../config:/home/config
       - .:/home/src/
     restart: on-failure:5
-    deploy:
-      resources:
-        limits:
-          cpus: '12'
-          memory: 12G
-        reservations:
-          cpus: '6'
-          memory: 6G
