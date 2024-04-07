@@ -1,6 +1,6 @@
 # blaithin
 
-
+You can find the dashboard [here](https://lookerstudio.google.com/reporting/004c1328-5006-4d28-9aa2-2feafd76e941)
 
 # Goal of Blaithin
 The motivation behind this project was to provide gardeners and aspiring gardeners in Ireland with a simplified tool for facilitating plant selection for their gardens. 
@@ -22,6 +22,7 @@ For now, we are parsing data manually to understand sizing, quantity and categor
 * terraform cli is installed
 * docker can be run locally
 * google auth uses local json file
+
 Please note that I ran this on a Windows machine only. If some part of this script does not work on Mac/Linux, please let me know.
 
 ### 1. Optional create a .env file in the root directory
@@ -37,13 +38,13 @@ TF_VAR_GCP_BUCKET_LOCATION=US
 Add your google account key under config folder and name it 'account_key.json'.
 This is used not only by the Terraform scripts but by DBT and Mage data loaders and exporters.
 
-### 2. Run build.sh
+### 3. Run build.sh
 This will run the terraform scripts under the Terraform folder.
 ```bash
 ./build.sh
 ```
 
-### 3. Run start.sh
+### 4. Run start.sh
 This will build the docker image and containers and start the same containers.
 Once Mage starts up, 2 tasks will kick off to load source data and export to staging tables in Cloud Storage.
 ```bash

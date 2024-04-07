@@ -86,7 +86,8 @@ blocks:
 - all_upstream_blocks_executed: false
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - trigger_dbt
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -99,6 +100,22 @@ blocks:
   upstream_blocks:
   - match_product_to_plant
   uuid: export_matches_to_gcs
+- all_upstream_blocks_executed: false
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: trigger_dbt
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - export_matches_to_gcs
+  uuid: trigger_dbt
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}

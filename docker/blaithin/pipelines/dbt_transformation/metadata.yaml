@@ -75,7 +75,7 @@ concurrency_config: {}
 conditionals: []
 created_at: '2024-04-05 12:35:45.935055+00:00'
 data_integration: null
-description: null
+description: Transform data in Big Query utilising DBT
 executor_config: {}
 executor_count: 1
 executor_type: null
