@@ -17,7 +17,7 @@ As someone who is passionate about gardening, I find the process of buying new p
 For now, we are parsing data manually to understand sizing, quantity and categorisation. This would be a great candidate for machine learning. 
 
 # Build Instructions
-Find them [here](BUILD.MD)
+Find them [here](BUILD.md)
 
 # Tools:
 ### 1. Web Scraping
