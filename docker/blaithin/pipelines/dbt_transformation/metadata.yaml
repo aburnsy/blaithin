@@ -10,7 +10,7 @@ blocks:
   language: sql
   name: models/core/fct_products
   retry_config: null
-  status: failed
+  status: executed
   timeout: null
   type: dbt
   upstream_blocks:

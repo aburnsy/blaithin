@@ -27,7 +27,7 @@ products_fact as (
         source_url,
         product_url,
         -- category,
-        product_name,
+        p.product_name,
         img_url,
         p.description as source_description,
         price,
