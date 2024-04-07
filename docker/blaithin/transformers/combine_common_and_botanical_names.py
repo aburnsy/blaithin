@@ -30,11 +30,6 @@ def transform(data, *args, **kwargs):
         pl.col('name').str.to_lowercase()
     )
 
-    plant_dicts = [{row[1]:row[0]} for row in plants.iter_rows()]
-
-    for plant in plant_dicts:
-        print(plant)
-
     return plants
 
 

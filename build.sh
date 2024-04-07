@@ -5,8 +5,3 @@ set -o allexport && source .env && set +o allexport || true # Ignore errors if .
 terraform -chdir=Terraform init
 terraform -chdir=Terraform validate -json
 terraform -chdir=Terraform apply --auto-approve
-
-
-# Fetch Terraform output for use later
-bucket_name=$(terraform -chdir=Terraform output -raw bucket_name)
-# echo $bucket_name
