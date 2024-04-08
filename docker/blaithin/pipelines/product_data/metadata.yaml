@@ -62,13 +62,15 @@ extensions: {}
 name: product_data
 notification_config: {}
 remote_variables_dir: null
-retry_config: {}
+retry_config:
+  delay: 60
+  exponential_backoff: true
+  retries: 5
 run_pipeline_in_one_process: false
 settings:
   triggers: null
 spark_config: {}
-tags:
-- daily
+tags: []
 type: python
 uuid: product_data
 variables:

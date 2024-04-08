@@ -26,7 +26,8 @@ In another [repo](https://github.com/aburnsy/blaithin_files), we have our web sc
 GCS - We use Google Cloud Storage for storing staging parquet files, Big Query as our Data Warehouse and Looker Studio for BI.
 ### 3. IaC
 Terraform is used to spin up all necessary GCS assets
-### Workflow Orchestration
-Mage AI is used to orchestrate data
-### Data Processing
-Polars and DBT are used to transform data in Big Query
+### 4. Workflow Orchestration
+Mage AI is used to orchestrate pipelines
+### 5. Data Processing
+DBT is used to orchestrate transformation of data in Big Query.
+We use Levenshtein distance from rapidfuzz to match plant data from RHS to product data from the scraped Irish nursery sites.
