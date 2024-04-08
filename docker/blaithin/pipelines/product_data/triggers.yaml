@@ -1,6 +1,6 @@
 triggers:
 - envs: []
-  last_enabled_at: 2024-03-28 06:30:27.725969+00:00
+  last_enabled_at: 2024-03-28 06:30:27.725969
   name: Daily fetch of product data from site arboretum
   pipeline_uuid: product_data
   schedule_interval: '@daily'
@@ -9,7 +9,7 @@ triggers:
     landing_time_enabled: false
   sla: null
   start_time: 2024-03-26 16:00:00
-  status: active
+  status: inactive
   variables:
     site: arboretum
 - envs: []
@@ -21,11 +21,11 @@ triggers:
   settings: null
   sla: null
   start_time: 2024-03-26 16:01:00
-  status: active
+  status: inactive
   variables:
     site: carragh
 - envs: []
-  last_enabled_at: 2024-03-28 06:30:27.847469+00:00
+  last_enabled_at: 2024-03-28 06:30:27.847469
   name: Daily fetch of product data from site gardens4you
   pipeline_uuid: product_data
   schedule_interval: '@daily'
@@ -33,11 +33,11 @@ triggers:
   settings: null
   sla: null
   start_time: 2024-03-26 16:02:00
-  status: active
+  status: inactive
   variables:
     site: gardens4you
 - envs: []
-  last_enabled_at: 2024-03-28 06:30:27.847469+00:00
+  last_enabled_at: 2024-03-28 06:30:27.847469
   name: Daily fetch of product data from site quickcrop
   pipeline_uuid: product_data
   schedule_interval: '@daily'
@@ -45,11 +45,11 @@ triggers:
   settings: null
   sla: null
   start_time: 2024-03-26 16:03:00
-  status: active
+  status: inactive
   variables:
     site: quickcrop
 - envs: []
-  last_enabled_at: 2024-03-28 06:30:27.847469+00:00
+  last_enabled_at: 2024-03-28 06:30:27.847469
   name: Daily fetch of product data from site tullys
   pipeline_uuid: product_data
   schedule_interval: '@daily'
@@ -57,7 +57,7 @@ triggers:
   settings: null
   sla: null
   start_time: 2024-03-26 16:04:00
-  status: active
+  status: inactive
   variables:
     site: tullys
 - envs: []

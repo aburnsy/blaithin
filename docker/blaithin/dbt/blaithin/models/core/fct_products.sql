@@ -53,8 +53,8 @@ products_fact as (
         habit,
         max_date_flag
     from stg_products p
-    inner join matches m on p.product_name = m.product_name
-    inner join rhs on m.id = rhs.id
+    left join matches m on p.product_name = m.product_name
+    left join rhs on m.id = rhs.id
     left join max_date using (input_date)
 )
 

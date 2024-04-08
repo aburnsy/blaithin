@@ -1,6 +1,6 @@
 triggers:
 - envs: []
-  last_enabled_at: 2024-04-05 06:11:46.537043+00:00
+  last_enabled_at: 2024-04-05 06:11:46.537043
   name: Daily fetch of rhs data
   pipeline_uuid: rhs_data
   schedule_interval: '@daily'
@@ -8,7 +8,7 @@ triggers:
   settings: null
   sla: null
   start_time: 2024-03-26 16:00:00
-  status: active
+  status: inactive
   variables: {}
 - envs: []
   last_enabled_at: 2024-04-05 06:11:46.564150+00:00

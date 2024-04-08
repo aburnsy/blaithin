@@ -21,14 +21,7 @@ def transform(data, *args, **kwargs):
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
     
-    data = (
-        pl.DataFrame(data)
-        # .filter(pl.col('product_name') == 'Red Sentinel Crab Apple Tree')
-        # .with_columns([
-        #     pl.col("product_name").map_elements(lambda s: default_process(s)).alias('product_name_lower')
-        #     ]
-        # )
-    )
+    data = pl.DataFrame(data).unique()
     
     return data
 
