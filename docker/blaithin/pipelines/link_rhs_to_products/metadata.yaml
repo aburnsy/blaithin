@@ -76,7 +76,7 @@ blocks:
   language: python
   name: match_product_to_plant
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: transformer
   upstream_blocks:
