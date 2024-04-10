@@ -31,13 +31,14 @@ def transform(plants, products, *args, **kwargs):
     # Specify your transformation logic here
 
     plant_values = plants.select("name").to_series(0).unique().to_list()
+    distinct_products = products.select("product_name_cleansed").unique()
 
     matched_products = (
-        products
-        # .filter(pl.col('product_name') == 'Euonymous japonicus')
-        # .sample(10)
+        distinct_products
+        # .filter(pl.col('product_name_cleansed').str.contains("stoechas"))
+        # .sample(100)
         .with_columns(
-            pl.col("product_name")
+            pl.col("product_name_cleansed")
             .map_elements(
                 lambda product_name: process.extractOne(
                     product_name,
@@ -53,8 +54,7 @@ def transform(plants, products, *args, **kwargs):
                         )
                     ],
                     scorer=Levenshtein.normalized_similarity,
-                    score_cutoff=0.25,
-                    processor=lambda s: default_process(s),
+                    score_cutoff=0.45,
                 )
             )
             .alias("match")
@@ -64,13 +64,12 @@ def transform(plants, products, *args, **kwargs):
         .with_columns(
             pl.when(pl.col("name").is_null())
             .then(
-                pl.col("product_name").map_elements(
+                pl.col("product_name_cleansed").map_elements(
                     lambda product_name: process.extractOne(
                         product_name,
                         plant_values,
                         scorer=Levenshtein.normalized_similarity,
                         score_cutoff=0.60,
-                        processor=lambda s: default_process(s),
                     )
                 )
             )
@@ -91,7 +90,11 @@ def transform(plants, products, *args, **kwargs):
             on="name",
             how="inner",
         )  # Only return matches on products from rhs website
-        .unique()
+        .join(
+            products,
+            on="product_name_cleansed",
+            how="inner",
+        )
     )
 
     return matched_products

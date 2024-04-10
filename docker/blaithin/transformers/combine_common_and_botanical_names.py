@@ -3,6 +3,7 @@ if 'transformer' not in globals():
 if 'test' not in globals():
     from mage_ai.data_preparation.decorators import test
 import polars as pl
+from rapidfuzz.utils import default_process
 
 @transformer
 def transform(data, *args, **kwargs):
@@ -27,8 +28,12 @@ def transform(data, *args, **kwargs):
 
     plants = pl.concat([common_name_plants,botanical_name_plants]).unique() # Unique here just in case there are dupes
     plants = plants.with_columns(
-        pl.col('name').str.to_lowercase()
+        pl.col('name').map_elements(lambda s: default_process(s)).str.replace("  ", " ").str.replace("  ", " ").str.strip()
     )
+    # Remove duplicates on name
+    plants = plants.groupby("name").agg(pl.col('id').sort().first())
+    
+    # Should we eventually only return one ID per name? We know we have duplicates for some
 
     return plants
 

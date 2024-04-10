@@ -1,40 +1,4 @@
 blocks:
-- all_upstream_blocks_executed: false
-  color: null
-  configuration:
-    file_path: dbt/blaithin/models/core/fct_products.sql
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: sql
-  name: models/core/fct_products
-  retry_config: null
-  status: executed
-  timeout: null
-  type: dbt
-  upstream_blocks:
-  - models/staging/stg_matches
-  - models/staging/stg_rhs
-  - models/staging/stg_products
-  uuid: models/core/fct_products
-- all_upstream_blocks_executed: true
-  color: null
-  configuration:
-    file_path: dbt/blaithin/models/staging/stg_matches.sql
-  downstream_blocks:
-  - models/core/fct_products
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: sql
-  name: models/staging/stg_matches
-  retry_config: null
-  status: updated
-  timeout: null
-  type: dbt
-  upstream_blocks: []
-  uuid: models/staging/stg_matches
 - all_upstream_blocks_executed: true
   color: null
   configuration:
@@ -55,6 +19,23 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration:
+    file_path: dbt/blaithin/models/staging/stg_matches.sql
+  downstream_blocks:
+  - models/core/fct_products
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: models/staging/stg_matches
+  retry_config: null
+  status: updated
+  timeout: null
+  type: dbt
+  upstream_blocks: []
+  uuid: models/staging/stg_matches
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
     file_path: dbt/blaithin/models/staging/stg_rhs.sql
   downstream_blocks:
   - models/core/fct_products
@@ -69,6 +50,25 @@ blocks:
   type: dbt
   upstream_blocks: []
   uuid: models/staging/stg_rhs
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    file_path: dbt/blaithin/models/core/fct_products.sql
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: models/core/fct_products
+  retry_config: null
+  status: executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - models/staging/stg_products
+  - models/staging/stg_matches
+  - models/staging/stg_rhs
+  uuid: models/core/fct_products
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
