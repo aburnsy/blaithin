@@ -20,6 +20,7 @@ For now, we are parsing data manually to understand sizing, quantity and categor
 Find them [here](BUILD.md)
 
 # Tools:
+![Data Flow within blaithin](data_flow.png)
 ### 1. Web Scraping
 In another [repo](https://github.com/aburnsy/blaithin_files), we have our web scraping scripts. These use Selenium, beautiful soup and requests_html to scrape data from the RHS website and Irish nursery sites
 ### 2. Cloud
