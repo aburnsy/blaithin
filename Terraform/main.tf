@@ -39,8 +39,9 @@ resource "google_bigquery_dataset" "blaithin" {
 }
 
 resource "google_bigquery_table" "rhs" {
-  dataset_id = google_bigquery_dataset.blaithin.dataset_id
-  table_id   = "rhs"
+  dataset_id          = google_bigquery_dataset.blaithin.dataset_id
+  table_id            = "rhs"
+  deletion_protection = false
 
   external_data_configuration {
     autodetect    = true
@@ -54,8 +55,9 @@ resource "google_bigquery_table" "rhs" {
 }
 
 resource "google_bigquery_table" "products" {
-  dataset_id = google_bigquery_dataset.blaithin.dataset_id
-  table_id   = "products"
+  dataset_id          = google_bigquery_dataset.blaithin.dataset_id
+  table_id            = "products"
+  deletion_protection = false
 
   external_data_configuration {
     autodetect    = true
@@ -69,8 +71,9 @@ resource "google_bigquery_table" "products" {
 }
 
 resource "google_bigquery_table" "matches" {
-  dataset_id = google_bigquery_dataset.blaithin.dataset_id
-  table_id   = "matches"
+  dataset_id          = google_bigquery_dataset.blaithin.dataset_id
+  table_id            = "matches"
+  deletion_protection = false
 
   external_data_configuration {
     autodetect    = true

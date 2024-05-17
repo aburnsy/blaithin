@@ -2,7 +2,13 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration:
+    dbt: {}
+    dbt_profile_target: null
+    disable_query_preprocessing: false
+    export_write_policy: append
     file_path: dbt/blaithin/models/staging/stg_products.sql
+    limit: 1000
+    use_raw_sql: false
   downstream_blocks:
   - models/core/fct_products
   executor_config: null
@@ -11,7 +17,7 @@ blocks:
   language: sql
   name: models/staging/stg_products
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: dbt
   upstream_blocks: []
@@ -28,7 +34,7 @@ blocks:
   language: sql
   name: models/staging/stg_matches
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: dbt
   upstream_blocks: []
@@ -50,7 +56,7 @@ blocks:
   type: dbt
   upstream_blocks: []
   uuid: models/staging/stg_rhs
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     file_path: dbt/blaithin/models/core/fct_products.sql

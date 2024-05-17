@@ -25,7 +25,7 @@ products as (
         img_url,
         description,
         price,
-          coalesce(
+        coalesce(
             IF(size_original LIKE '%bare%', 'Bare Root', NULL),
             upper(replace(regexp_extract(size_original, r'\d?\.?\d+ *[Ll]'), ' ','')),
             lower(replace(regexp_extract(size_original, r'\d+ ?[Cc][Mm]'),' ','')),
@@ -60,7 +60,7 @@ products as (
                 WHEN 'P30' THEN '15L'
                 ELSE NULL
             END,
-            'Unknown',
+            'Unknown'
         ) as size,
         size_original,
         stock,
